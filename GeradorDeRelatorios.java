@@ -1,33 +1,16 @@
 import java.io.PrintWriter;
 import java.io.IOException;
+import Enum.*;
 
 import java.util.*;
 
 public class GeradorDeRelatorios {
-
-	public static final String ALG_INSERTIONSORT = "quick";
-	public static final String ALG_QUICKSORT = "insertion";
-
-	public static final String CRIT_DESC_CRESC = "descricao_c";
-	public static final String CRIT_PRECO_CRESC = "preco_c";
-	public static final String CRIT_ESTOQUE_CRESC = "estoque_c";
-	
-	public static final String FILTRO_TODOS = "todos";
-	public static final String FILTRO_ESTOQUE_MENOR_OU_IQUAL_A = "estoque_menor_igual";
-	public static final String FILTRO_CATEGORIA_IGUAL_A = "categoria_igual";
-
-	// operador bit a bit "ou" pode ser usado para combinar mais de  
-	// um estilo de formatacao simultaneamente (veja como no main)
-	public static final int FORMATO_PADRAO  = 0b0000;
-	public static final int FORMATO_NEGRITO = 0b0001;
-	public static final int FORMATO_ITALICO = 0b0010;
-
 	private Produto [] produtos;
 	private String algoritmo;
 	private String criterio;
 	private String filtro;
 	private String argFiltro;
-	private int format_flags;	
+	private int format_flags;
 
 	public GeradorDeRelatorios(Produto [] produtos, String algoritmo, String criterio, String filtro, String argFiltro, int format_flags){
 
@@ -316,7 +299,7 @@ public class GeradorDeRelatorios {
 		for(int i = 0; i < opcoes_formatacao.length; i++) {
 
 			String op = opcoes_formatacao[i];
-			formato |= (op != null ? op.equals("negrito") ? FORMATO_NEGRITO : (op.equals("italico") ? FORMATO_ITALICO : 0) : 0); 
+			formato |= (op != null ? op.equals("negrito") ? FORMATO_NEGRITO : (op.equals("italico") ? FORMATO_ITALICO : 0) : 0);
 		}
 		
 		GeradorDeRelatorios gdr = new GeradorDeRelatorios(	carregaProdutos(), 
