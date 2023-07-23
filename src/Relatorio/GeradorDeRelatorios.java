@@ -4,24 +4,19 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.*;
 
-import src.Ordenacao.EstrategiaOrdenacao;
-import src.Ordenacao.InsertionSort;
 import src.Ordenacao.OrdenaProdutos;
-import src.Ordenacao.QuickSort;
 import src.Produto.Produto;
-import src.Enum.CriterioEnum;
 import src.Enum.FiltroEnum;
-import src.Enum.OrdenacaoEnum;
 import src.Enum.FormatoEnum;
 import src.Produto.ProdutoPadrao;
 
 public class GeradorDeRelatorios {
-	private ArrayList<Produto> produtos;
-	private String algoritmo;
-	private String criterio;
-	private String filtro;
-	private String argFiltro;
-	private int format_flags;
+	private final ArrayList<Produto> produtos;
+	private final String algoritmo;
+	private final String criterio;
+	private final String filtro;
+	private final String argFiltro;
+	private final int format_flags;
 
 	public GeradorDeRelatorios(ArrayList<Produto> produtos, String algoritmo, String criterio, String filtro, String argFiltro, int format_flags){
 
