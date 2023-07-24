@@ -132,10 +132,8 @@ public class GeradorDeRelatorios {
 		opcoes_formatacao[0] = args.length > 4 ? args[4] : null;
 		opcoes_formatacao[1] = args.length > 5 ? args[5] : null;
 		int formato = FormatoEnum.FORMATO_PADRAO.getFormato();
-		
-		for(int i = 0; i < opcoes_formatacao.length; i++) {
 
-			String op = opcoes_formatacao[i];
+		for (String op : opcoes_formatacao) {
 			formato |= (op != null ? op.equals("negrito") ? FormatoEnum.FORMATO_NEGRITO.getFormato() : (op.equals("italico") ? FormatoEnum.FORMATO_ITALICO.getFormato() : 0) : 0);
 		}
 		
