@@ -1,3 +1,7 @@
+package src.Produto;
+
+import src.Produto.Produto;
+
 import java.text.NumberFormat;
 
 public class ProdutoPadrao implements Produto {

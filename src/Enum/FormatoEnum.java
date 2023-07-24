@@ -1,4 +1,4 @@
-package Enum;
+package src.Enum;
 
 public enum FormatoEnum {
     FORMATO_PADRAO(0b0000),

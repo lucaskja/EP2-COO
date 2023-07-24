@@ -4,9 +4,9 @@ import src.Produto.Produto;
 
 import java.util.Comparator;
 
-public class ComparadorPreco implements Comparator<Produto> {
+public class ComparadorPrecoCresc implements Comparator<Produto> {
     @Override
     public int compare(Produto p1, Produto p2) {
-        return Double.compare(p1.getPreco(), p2.getPreco());
+        return Double.compare(p2.getPreco(), p1.getPreco());
     }
 }

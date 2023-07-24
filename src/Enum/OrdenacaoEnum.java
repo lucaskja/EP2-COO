@@ -1,8 +1,8 @@
-package Enum;
+package src.Enum;
 
 public enum OrdenacaoEnum{
-    ALG_INSERTIONSORT("quick"),
-    ALG_QUICKSORT("insertion");
+    ALG_INSERTIONSORT("insertion"),
+    ALG_QUICKSORT("quick");
 
     private String ordenacao;
 
