@@ -8,7 +8,6 @@ import src.Filtro.Filtragem;
 import src.Formatacao.AplicadorFormatacao;
 import src.Ordenacao.OrdenaProdutos;
 import src.Produto.Produto;
-import src.Enum.FormatoEnum;
 
 public class GeradorDeRelatorios {
 	private ArrayList<Produto> produtos;
@@ -21,13 +20,29 @@ public class GeradorDeRelatorios {
 	private final ArrayList<Boolean> negrito;
 	private final ArrayList<Boolean> italico;
 
+	public ArrayList<String> getCores() {
+		return cores;
+	}
+
+	public ArrayList<Boolean> getNegrito() {
+		return negrito;
+	}
+
+	public ArrayList<Boolean> getItalico() {
+		return italico;
+	}
+
+	public void setProdutos(ArrayList<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	public GeradorDeRelatorios(
-			ArrayList<Produto> produtos,
-			String algoritmo,
-			String criterio,
-			String filtro,
-			String argFiltro,
-			int format_flags
+		ArrayList<Produto> produtos,
+		String algoritmo,
+		String criterio,
+		String filtro,
+		String argFiltro,
+		int format_flags
 	){
 		this.produtos = (ArrayList<Produto>)produtos.clone();
 		this.algoritmo = algoritmo;
@@ -105,10 +120,10 @@ public class GeradorDeRelatorios {
 				out.print("<li>");
 				out.print(
 					AplicadorFormatacao.saidaFormatacaoCsv(
-							p.formataParaImpressao(),
-							this.negrito.get(count),
-							this.italico.get(count),
-							this.cores.get(count)
+						p.formataParaImpressao(),
+						this.negrito.get(count),
+						this.italico.get(count),
+						this.cores.get(count)
 					)
 				);
 				out.println("</li>");
@@ -122,53 +137,5 @@ public class GeradorDeRelatorios {
 		out.println("</html>");
 
 		out.close();
-	}
-
-	public static void main(String [] args) {
-
-		if(args.length < 4){
-			System.out.println("Uso:");
-			System.out.println("\tjava " + GeradorDeRelatorios.class.getName() + " <algoritmo> <critério de ordenação> <critério de filtragem> <parâmetro de filtragem> <opções de formatação>");
-			System.out.println("Onde:");
-			System.out.println("\talgoritmo: 'quick' ou 'insertion'");
-			System.out.println("\tcriterio de ordenação: 'preco_c' ou 'descricao_c' ou 'estoque_c'");
-			System.out.println("\tcriterio de filtragem: 'todos' ou 'estoque_menor_igual' ou 'categoria_igual'");
-			System.out.println("\tparâmetro de filtragem: argumentos adicionais necessários para a filtragem");
-			System.out.println("\topções de formatação: 'negrito' e/ou 'italico'");
-			System.out.println();
-			System.exit(1);
-		}
-
-		String opcao_algoritmo = args[0];
-		String opcao_criterio_ord = args[1];
-		String opcao_criterio_filtro = args[2];
-		String opcao_parametro_filtro = args[3];
-
-		String [] opcoes_formatacao = new String[2];
-		opcoes_formatacao[0] = args.length > 4 ? args[4] : null;
-		opcoes_formatacao[1] = args.length > 5 ? args[5] : null;
-		int formato = FormatoEnum.FORMATO_PADRAO.getFormato();
-
-		for (String op : opcoes_formatacao) {
-			formato |= (op != null ? op.equals("negrito") ? FormatoEnum.FORMATO_NEGRITO.getFormato() : (op.equals("italico") ? FormatoEnum.FORMATO_ITALICO.getFormato() : 0) : 0);
-		}
-
-		GeradorDeRelatorios gdr = new GeradorDeRelatorios(
-				CarregadorDeProdutos.carregaProdutos(),
-				opcao_algoritmo,
-				opcao_criterio_ord,
-				opcao_criterio_filtro,
-				opcao_parametro_filtro,
-				formato
-			);
-		gdr.produtos = new CarregadorDeProdutosCsv().lerCsv("produtos.csv", gdr.cores, gdr.negrito, gdr.italico);
-		try{
-			gdr.geraRelatorioCsv("saida.html");
-//			gdr.geraRelatorio("saida.html");
-		}
-		catch(IOException e){
-			
-			e.printStackTrace();
-		}
 	}
 }

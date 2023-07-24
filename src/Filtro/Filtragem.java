@@ -18,6 +18,14 @@ public class Filtragem {
             return new FiltroCategoriaIgual().estaSelecionado(produto, argFiltro);
         }
 
+        if (filtro.equals(FiltroEnum.FILTRO_INTERVALO.getFiltro())) {
+            return new FiltroIntervalo().estaSelecionado(produto, argFiltro);
+        }
+
+        if (filtro.equals(FiltroEnum.FILTRO_SUBSTRING.getFiltro())) {
+            return new FiltroSubstring().estaSelecionado(produto, argFiltro);
+        }
+
         throw new RuntimeException("Filtro invalido!");
     }
 }
