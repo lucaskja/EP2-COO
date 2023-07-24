@@ -6,12 +6,8 @@ import java.util.*;
 
 import src.Filtro.Filtragem;
 import src.Formatacao.AplicadorFormatacao;
-import src.Formatacao.Formatador;
-import src.Formatacao.FormatadorItalico;
-import src.Formatacao.FormatadorNegrito;
 import src.Ordenacao.OrdenaProdutos;
 import src.Produto.Produto;
-import src.Enum.FiltroEnum;
 import src.Enum.FormatoEnum;
 import src.Produto.ProdutoPadrao;
 
