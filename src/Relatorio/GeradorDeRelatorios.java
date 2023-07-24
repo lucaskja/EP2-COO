@@ -4,6 +4,11 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.*;
 
+import src.Filtro.Filtragem;
+import src.Formatacao.AplicadorFormatacao;
+import src.Formatacao.Formatador;
+import src.Formatacao.FormatadorItalico;
+import src.Formatacao.FormatadorNegrito;
 import src.Ordenacao.OrdenaProdutos;
 import src.Produto.Produto;
 import src.Enum.FiltroEnum;
@@ -49,53 +54,13 @@ public class GeradorDeRelatorios {
 
 		int count = 0;
 
-		for(int i = 0; i < produtos.size(); i++){
+		for (Produto p : produtos) {
 
-			Produto p = produtos.get(i);
-			boolean selecionado = false;
+			boolean selecionado = Filtragem.filtrar(p, this.filtro, this.argFiltro);
 
-			if(filtro.equals(FiltroEnum.FILTRO_TODOS.getFiltro())){
-
-				selecionado = true;
-			}
-			else if(filtro.equals(FiltroEnum.FILTRO_ESTOQUE_MENOR_OU_IQUAL_A.getFiltro())){
-
-				if(p.getQtdEstoque() <= Integer.parseInt(argFiltro)) selecionado = true;	
-			}
-			else if(filtro.equals(FiltroEnum.FILTRO_CATEGORIA_IGUAL_A.getFiltro())){
-
-				if(p.getCategoria().equalsIgnoreCase(argFiltro)) selecionado = true;
-			}
-			else{
-				throw new RuntimeException("Filtro invalido!");			
-			}
-
-			if(selecionado){
-
+			if (selecionado) {
 				out.print("<li>");
-
-				if((format_flags & FormatoEnum.FORMATO_ITALICO.getFormato()) > 0){
-
-					out.print("<span style=\"font-style:italic\">");
-				}
-
-				if((format_flags & FormatoEnum.FORMATO_NEGRITO.getFormato()) > 0){
-
-					out.print("<span style=\"font-weight:bold\">");
-				} 
-			
-				out.print(p.formataParaImpressao());
-
-				if((format_flags & FormatoEnum.FORMATO_NEGRITO.getFormato()) > 0){
-
-					out.print("</span>");
-				} 
-
-				if((format_flags & FormatoEnum.FORMATO_ITALICO.getFormato()) > 0){
-
-					out.print("</span>");
-				}
-
+				out.print(AplicadorFormatacao.saidaFormatacao(this.format_flags, p.formataParaImpressao()));
 				out.println("</li>");
 				count++;
 			}
